@@ -1,0 +1,82 @@
+ <!-- Login / Cadastro -->
+    <div class="bckgLoginExterno">
+      <p>Logar com:</p>
+      <!-- Google -->
+      <button  (click)="authGoogle()"  class="btn btn-primary" id="authGoogleButton">Google
+          <i class="fa fa-google fa-2x"></i>
+      </button>
+
+    <!-- Facebook -->
+    <button  (click)="authFacebook()" class="btn btn-lg btn-primary btn-block" id="authFacebookButton">Facebook
+      <i class="fa fa-facebook fa-2x"></i>
+    </button>
+
+    <!-- Twitter -->
+    <button  (click)="authTwitter()" class="btn btn-lg btn-primary btn-block" id="authTwitterButton">Twitter
+        <i class="fa fa-twitter fa-2x"></i>
+    </button>
+
+    <!-- GitHub -->
+    <button  (click)="authGitHub()" class="btn btn-lg btn-primary btn-block" id="authGitHubButton">GitHub
+        <i class="fa fa-github fa-2x"></i>
+    </button>
+
+    <!-- Anonymously -->
+    <button  (click)="authAnonimo()" class="btn btn-lg btn-primary btn-block" id="authAnonymouslyButton">Anônimo
+        <i class="fa fa-user fa-2x"></i>
+    </button>
+  </div>
+
+  <div class="clearfix">
+      <div class="column bckgLoginInterno">
+
+        <form #f="ngForm" (ngSubmit)="authUser(f)">
+          <p>Já possuo cadastro:</p>
+
+          <span class="ui-float-label">
+            <input class="float-input" type="text" size="40"  name="email"
+            required [(ngModel)]="emailInput" #email="ngModel" pInputText>
+            <label for="float-input">email</label>
+
+          </span>
+
+          <span class="ui-float-label">
+            <input class="float-input" type="password" size="40"  name="senha"
+            required ngModel pInputText>
+            <label for="float-input">senha</label>
+          </span>
+
+          <button pButton type="submit"  class="ui-button-success" label="Acessar"></button>
+        </form>
+      </div>
+
+        <div class="column cadastro">
+          <form>
+          <p>Sou novo aqui! ;) Vamos começar?</p>
+
+          <span class="ui-float-label">
+              <input id="float-input" type="text" size="40" id="emailInput"  pInputText>
+              <label for="float-input">email</label>
+            </span>
+
+            <button pButton type="button" [routerLink]="['/cadastro']" class="ui-button-success" label="Cadastrar"></button>
+          </form>
+        </div>
+    </div>
+
+        <div class="userLogin">
+            <section class="google-login-page">
+                <div  >
+                <img src="{{imageURL}}">
+                <!--br>
+                <b>TOKEN: </b>
+                <p>{{token}}</p-->
+                <!--b>NAME: </b-->
+                <p>{{name}}</p>
+                <!--b>EMAIL: </b-->
+                <p>{{email}}</p>
+                <button type="button" (click)="logout()">Sair</button>
+              </div>
+              <br/>
+            </section>
+        </div>
