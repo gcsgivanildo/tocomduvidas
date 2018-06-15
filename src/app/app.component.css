@@ -91,3 +91,19 @@ p{
   float: left;
 }
 
+.barraHome {
+  /*background-color: #EBEBEB;*/
+  padding: 20px 0px 15px 20px;
+  margin: 30px 0px 30px 0px;
+}
+
+.divslogan{
+  margin-top: -50px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.imghome{
+  width: 100%;
+  position: inherit;
+}

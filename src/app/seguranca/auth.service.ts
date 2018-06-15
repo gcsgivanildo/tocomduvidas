@@ -33,10 +33,10 @@ export class AuthService {
 
   // Autenticar com o Google
   authGoogle() {
-    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then((user: firebase.User) => {
-        this.router.navigate(['/']);
-      });
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    // .then((user: firebase.User) => {
+     //   this.router.navigate(['/login']);
+     // });
   }
   // Vincular conta ao Google
   vinculaGoogle() {

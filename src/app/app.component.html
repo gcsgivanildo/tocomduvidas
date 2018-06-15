@@ -1,11 +1,12 @@
 <div>
-  <div *ngIf="token == null" class="bckgAuth">
+
+  <div *ngIf="token == null" class="container">
       <nav>
         <a [routerLink]="['/login']">Login</a> |
         <a href="#">Esqueci a senha</a>
     </nav>
   </div>
-  <div *ngIf="token" class="bckgAuth">
+  <div *ngIf="token" class="container"> <!--class="bckgAuth"-->
       <nav>
           <a [routerLink]="['/aluno']"><!--i class="fa fa-user-circle" aria-hidden="true"></i--><img src="{{ imageURL }}"/> {{ name }}</a> |
           <a href="" (click)="logout()"><i class="fa fa-window-close" aria-hidden="true"></i> Sair</a>
@@ -15,7 +16,7 @@
   <ng-template #primaryBlock>Primary text to show</ng-template>
   <ng-template #secondaryBlock>Secondary text to show</ng-template>
   <ng-template #elseBlock>Alternate text while primary text is hidden</ng-template-->
-  <div class="container">
+<div class="container">
   <header>
     <nav class="principal">
       <a href="#">Institucional</a> |

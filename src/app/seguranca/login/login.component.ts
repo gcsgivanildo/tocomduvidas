@@ -121,6 +121,7 @@ export class LoginComponent implements OnInit {
      // this.name = 'Bem vindo, ' + result.user.displayName;
       console.log('Bem vindo, ' + result.user.displayName);
       console.log(result.credential.accessToken);
+      this.router.navigate(['/home']);
     }).catch(function (error) {
       console.log(error);
       alert('Falha na autenticação');

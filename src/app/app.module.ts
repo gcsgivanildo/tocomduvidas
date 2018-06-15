@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
+import { HomeModule } from './home/home.module';
 import { ProfessorModule } from './professor/professor.module';
 import { AlunoModule } from './aluno/aluno.module';
 
@@ -31,9 +32,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
     HttpModule,
     AppRoutingModule,
     SegurancaModule,
+    HomeModule,
     ProfessorModule,
     AlunoModule,
 
@@ -41,7 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
 
-    BrowserAnimationsModule,
+
     ButtonModule,
     ContextMenuModule,
     DataTableModule,
