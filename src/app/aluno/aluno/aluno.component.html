@@ -1,3 +1,60 @@
-<p>
-  aluno works!
-</p>
+<div class="bckground">
+    <div>
+      <a href="javascript:;" (click)="listarPerfil=true" (click)="editarStatus=false">Visualizar Cadastro   |</a>
+      <a href="javascript:;" (click)="pegarId()" (click)="editarStatus=true" (click)="listarPerfil=flase">Editar Cadastro</a>
+    </div>
+    <br>
+
+    <div *ngIf="listarPerfil">
+      <p-table [value]="alunos" [responsive]="true">
+        <ng-template pTemplate="header" >
+            <tr >
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th class="col-acoes">Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-aluno>
+            <tr *ngIf="aluno.id===userId">
+                <td >{{aluno.displayName}}</td>
+                <td>{{aluno.telefone}}</td>
+                <td class="col-acoes">
+                  <button pButton icon="fa fa-edit" pTooltip="Editar" tooltipPosition="top"
+                  (click)="editarAluno(aluno.id)" (click)="listarPerfil=flase"></button>
+                  <button pButton icon="fa fa-close" pTooltip="Excluir" tooltipPosition="top" (click)='deletarAluno(aluno.id)'></button>
+                </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div *ngIf="editarStatus" >
+      <form #alunoForm="ngForm" (onSubmit)="editarAluno()"> <!--#f="ngForm"-->
+        <div class="ui-g-12 ui-fluid"> <!--  class="form-group"-->
+          <label for="displayNameA" class="label">Editar seu nome</label>
+          <br>
+          <input pInputText type="text" class="form-control"  placeholder="Nome Sobrenome" name="displayNameA" [(ngModel)]="aluno.displayName"
+            #displayNameA="ngModel"  required minlength="5">
+
+          <app-message [control]="displayNameA" error="required"
+          text="Informe o nome"></app-message>
+
+          <app-message [control]="displayNameA" error="minlength"
+          text="Mínimo de {{ displayNameA.errors?.minlength?.requiredLength }} caracteres!"></app-message>
+          <!--div class="erro" *ngIf="!nome.valid && nome.touched">Campo Obrigatório!</div-->
+        </div>
+        <div class="ui-g-12 ui-md-2 ui-fluid">
+          <label>Telefone</label>
+          <p-inputMask mask="(99)99999-9999" name="telefone" [(ngModel)]="aluno.telefone"
+          #telefone="ngModel" required></p-inputMask>
+
+          <app-message [control]="telefone" error="required"
+            text="Informe o Telefone"></app-message>
+      </div>
+
+    </form>
+        <div class="ui-md-2 ui-fluid">
+          <button pButton label="Atualizar" (click)="updateAluno(aluno)" class="ui-button-warning" [disabled]="!alunoForm.valid"></button>
+        </div>
+  </div>
+</div>

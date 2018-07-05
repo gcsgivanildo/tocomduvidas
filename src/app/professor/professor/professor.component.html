@@ -1,3 +1,121 @@
-<p>
-  professor works!
-</p>
+<div class="bckground">
+  <div>
+    <a href="javascript:;" (click)="listarPerfil=true" (click)="editarStatus=false" (click)="cadastrarArea=false" (click)="listarAreas=false">Visualizar Cadastro  |</a>
+    <a href="javascript:;" (click)="pegarId()" (click)="editarStatus=true" (click)="listarPerfil=flase" (click)="cadastrarArea=false" (click)="listarAreas=false"> Editar Cadastro  |</a>
+    <a href="javascript:;" (click)="cadastrarArea=true" (click)="listarPerfil=false" (click)="editarStatus=false" (click)="listarAreas=false"> Adicionar Área  |</a>
+    <a href="javascript:;" (click)="listarAreas=true" (click)="cadastrarArea=false" (click)="listarPerfil=false" (click)="editarStatus=false"> Listar Áreas</a>
+  </div>
+  <br>
+
+  <div *ngIf="listarPerfil==true">
+    <p-table [value]="professores" [responsive]="true"> <!--[paginator]= "true" [rows]="5"-->
+      <ng-template pTemplate="header" >
+          <tr >
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th class="col-acoes">Ações</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-prof>
+
+        <tr *ngIf="prof.id===userId">
+              <td >{{prof.displayName}}</td>
+              <td>{{prof.telefone}}</td>
+
+              <td class="col-acoes">
+                <button pButton icon="fa fa-edit" pTooltip="Editar" tooltipPosition="top"
+                (click)="editarProfessor(prof.id)"  (click)="listarPerfil=flase" ></button>
+                <button pButton icon="fa fa-close" pTooltip="Excluir" tooltipPosition="top" (click)='deletarProfessor(prof.id)'></button>
+              </td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div *ngIf="editarStatus==true" >
+    <form #professorForm="ngForm" (onSubmit)="editarProfessor()"> <!--#f="ngForm"-->
+      <div class="ui-g-12 ui-fluid"> <!--  class="form-group"-->
+        <label for="displayNameP" class="label">Editar seu nome</label>
+        <br>
+        <input pInputText type="text" class="form-control"  placeholder="Nome Sobrenome" name="displayNameP" [(ngModel)]="professor.displayName"
+          #displayNameP="ngModel"  required minlength="5">
+
+        <app-message [control]="displayNameP" error="required"
+        text="Informe o nome"></app-message>
+
+        <app-message [control]="displayNameP" error="minlength"
+        text="Mínimo de {{ displayNameP.errors?.minlength?.requiredLength }} caracteres!"></app-message>
+        <!--div class="erro" *ngIf="!nome.valid && nome.touched">Campo Obrigatório!</div-->
+      </div>
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Telefone</label>
+        <p-inputMask mask="(99)99999-9999" name="telefone" [(ngModel)]="professor.telefone"
+          #telefone="ngModel" required></p-inputMask>
+
+          <app-message [control]="telefone" error="required"
+            text="Informe o Telefone"></app-message>
+      </div>
+      <div class="ui-md-2 ui-fluid">
+        <button pButton label="Atualizar" (click)="updateProfessor(professor)" class="ui-button-warning" [disabled]="!professorForm.valid"></button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="cadastrarArea==true">
+    <!--Form da área de atuação-->
+    <form #areaForm="ngForm"  (onSubmit)="onSubmitP()"> <!--#f="ngForm"-->
+      <!--parte professor-->
+      <div class="ui-g-12 ui-fluid"> <!--  class="form-group"-->
+        <label for="displayNameD" class="label">Nome da área</label>
+        <br>
+        <input pInputText type="text" class="form-control"  placeholder="Área ou Disciplina" name="displayNameD" [(ngModel)]="area.displayName"
+          #displayNameD="ngModel"  required minlength="3">
+
+        <app-message [control]="displayNameD" error="required"
+        text="Informe a área ou disciplina"></app-message>
+
+        <app-message [control]="displayNameD" error="minlength"
+        text="Mínimo de {{ displayNameD.errors?.minlength?.requiredLength }} caracteres!"></app-message>
+        <!--div class="erro" *ngIf="!nome.valid && nome.touched">Campo Obrigatório!</div-->
+      </div>
+      <div class="ui-md-2 ui-fluid">
+        <button pButton label="Cadastrar" (click)="cadastrarArea(area)" class="ui-button-warning" [disabled]="!areaForm.valid"></button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="listarAreas==true">
+    <p-table [value]="areas">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Área ou Disciplina</th>
+          <!--th>Id do Professor</th-->
+          <th class="col-acoes">Ações</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-areaRow>
+        <tr *ngIf="areaRow.professorId===userId">
+          <td pEditableColumn>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="text" placeholder="{{areaRow.displayName}}" name="displayName" [(ngModel)]="area.displayName" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{areaRow.displayName}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+
+          <td class="col-acoes">
+            <button pButton icon="fa fa-edit" pTooltip="Clique para atualizar" tooltipPosition="top"
+            (click)="updateArea($event, areaRow, area)"  (click)="listarPerfil=false" ></button>
+            <button pButton icon="fa fa-close" pTooltip="Excluir" tooltipPosition="top" (click)='deletarArea(area.id)'></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+</div>

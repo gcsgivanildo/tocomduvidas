@@ -1,15 +1,19 @@
 <div>
 
-  <div *ngIf="token == null" class="container">
+  <div *ngIf="!(usuario | async)" class="container">
       <nav>
         <a [routerLink]="['/login']">Login</a> |
         <a href="#">Esqueci a senha</a>
     </nav>
   </div>
-  <div *ngIf="token" class="container"> <!--class="bckgAuth"-->
+  <div *ngIf="(usuario | async)" class="container"> <!--class="bckgAuth"-->
       <nav>
-          <a [routerLink]="['/aluno']"><!--i class="fa fa-user-circle" aria-hidden="true"></i--><img src="{{ imageURL }}"/> {{ name }}</a> |
-          <a href="" (click)="logout()"><i class="fa fa-window-close" aria-hidden="true"></i> Sair</a>
+        <img *ngIf="(usuario | async)?.photoURL"  class="d-flex mr-3" width="60" src="{{ (usuario | async)?.photoURL }}" alt="{{ (usuario | async)?.displayName }}">
+        <img *ngIf="!(usuario | async)?.photoURL"  class="d-flex mr-3" width="60" src="http://www.politize.com.br/wp-content/uploads/2016/08/imagem-sem-foto-de-perfil-do-facebook-1348864936180_956x5001.jpg" alt="{{ (user | async)?.displayName }}">
+        <a class = "width=60" [routerLink]="['/']"><!--i class="fa fa-user-circle" aria-hidden="true"></i-->
+          {{ (usuario | async)?.displayName }}
+        </a> |
+        <a href="" (click)="logout()"><i class="fa fa-window-close" aria-hidden="true"></i> Sair</a>
       </nav>
   </div>
   <!--div *ngIf="show; then thenBlock; else elseBlock">this is ignored</div>
@@ -19,12 +23,14 @@
 <div class="container">
   <header>
     <nav class="principal">
-      <a href="#">Institucional</a> |
-        <a href="#">Como Funciona</a> |
-        <a routerLinkActive="ativo" routerLink="/cadastro">Cadastro</a> |
-        <a routerLinkActive="ativo" routerLink="/professor">Professor</a> |
-        <a routerLinkActive="ativo" routerLink="/aluno">Aluno</a> |
-        <a routerLinkActive="ativo" routerLink="/teste">Testes</a>
+      <a href="#"> Institucional </a>
+        <a href="#"> Como Funciona </a>
+        <a *ngIf="!(usuario | async)" routerLinkActive="ativo" routerLink="/login"> Cadastro </a>
+        <a *ngIf="((estaCadastradoP===false)  && (usuario | async)) || ((estaCadastradoA===false) && (usuario | async))" routerLinkActive="ativo" routerLink="/cadastro"> Cadastro </a>
+        <a *ngIf="((estaCadastradoP===true)  && (usuario | async))" routerLinkActive="ativo" routerLink="/professor"> Professor </a>
+        <a *ngIf="((estaCadastradoA===true)  && (usuario | async))" routerLinkActive="ativo" routerLink="/aluno"> Aluno </a>
+        <!--a routerLinkActive="ativo" routerLink="/teste"> Testes </a-->
+        <!--button (click)="existeProfessorId()">listar</button-->
     </nav>
   </header>
   <a [routerLink]="['/']"><img class="imgHeader" src="../assets/img/logo.png"></a>

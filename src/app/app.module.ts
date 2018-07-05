@@ -9,19 +9,22 @@ import { SegurancaModule } from './seguranca/seguranca.module';
 import { HomeModule } from './home/home.module';
 import { ProfessorModule } from './professor/professor.module';
 import { AlunoModule } from './aluno/aluno.module';
+import { CadastroModule } from './cadastro/cadastro.module';
 
 import { AngularFireModule } from 'angularfire2/firebase.app.module';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseConfig } from '../environments/firebase.config';
-import { ButtonModule } from 'primeng/components/button/button';
+import { AngularFirestore } from 'angularfire2/firestore';
 
+import { ButtonModule } from 'primeng/components/button/button';
 import { StepsModule, MenuItem, SliderModule, MenuModule, PasswordModule, DropdownModule } from 'primeng/primeng';
 import { InputTextModule, GrowlModule, MenubarModule, SharedModule, DataTableModule } from 'primeng/primeng';
 import { RadioButtonModule, ContextMenuModule, TabViewModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -39,11 +42,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeModule,
     ProfessorModule,
     AlunoModule,
+    CadastroModule,
 
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-
 
     ButtonModule,
     ContextMenuModule,
@@ -63,7 +66,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

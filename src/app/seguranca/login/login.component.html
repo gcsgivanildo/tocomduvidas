@@ -22,9 +22,9 @@
     </button>
 
     <!-- Anonymously -->
-    <button  (click)="authAnonimo()" class="btn btn-lg btn-primary btn-block" id="authAnonymouslyButton">Anônimo
+    <!--button  (click)="authAnonimo()" class="btn btn-lg btn-primary btn-block" id="authAnonymouslyButton">Anônimo
         <i class="fa fa-user fa-2x"></i>
-    </button>
+    </button-->
   </div>
 
   <div class="clearfix">
@@ -51,32 +51,23 @@
       </div>
 
         <div class="column cadastro">
-          <form>
-          <p>Sou novo aqui! ;) Vamos começar?</p>
+          <!--form-->
+            <p>Sou novo aqui! ;) Vamos começar?</p>
 
-          <span class="ui-float-label">
-              <input id="float-input" type="text" size="40" id="emailInput"  pInputText>
-              <label for="float-input">email</label>
+            <span class="ui-float-label">
+              <input class="float-input" type="text" size="40" [(ngModel)]="nomeInput" name="nomeInput" required pInputText>
+              <label for="float-input">Nome</label>
+            </span>
+            <span class="ui-float-label">
+              <input class="float-input" type="email" size="40" [(ngModel)]="emailInput" name="emailInput" required pInputText>
+              <label for="float-input">Email</label>
+            </span>
+            <span class="ui-float-label">
+              <input class="float-input" type="password" size="40" [(ngModel)]="senhaInput" name="senhaInput"required pInputText>
+              <label for="float-input">Senha</label>
             </span>
 
-            <button pButton type="button" [routerLink]="['/cadastro']" class="ui-button-success" label="Cadastrar"></button>
-          </form>
+            <button pButton type="button" (click)="cadastroEmail()" class="ui-button-success" label="Cadastrar"></button>
+          <!--/form-->
         </div>
     </div>
-
-        <div class="userLogin">
-            <section class="google-login-page">
-                <div  >
-                <img src="{{imageURL}}">
-                <!--br>
-                <b>TOKEN: </b>
-                <p>{{token}}</p-->
-                <!--b>NAME: </b-->
-                <p>{{name}}</p>
-                <!--b>EMAIL: </b-->
-                <p>{{email}}</p>
-                <button type="button" (click)="logout()">Sair</button>
-              </div>
-              <br/>
-            </section>
-        </div>

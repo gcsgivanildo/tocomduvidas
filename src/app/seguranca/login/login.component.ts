@@ -13,15 +13,17 @@ import * as firebase from 'firebase/app';
 })
 export class LoginComponent implements OnInit {
 
-  user: Observable<firebase.User>;
-  nome: string;
-  email: string;
-  senha: string;
+  user;
+  nomeInput: string;
+  emailInput: string;
+  senhaInput: string;
   urlImagem: string;
 
   constructor(
     public auth: AuthService,
-    private router: Router) { }
+    private router: Router) {
+    this.user = auth.usuario;
+    }
 
   ngOnInit() {
   }
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
     .then(function (result) {
       console.log(result);
       alert('Autenticado ' + f.value.email);
+      this.router.navigate(['/home']);
     })
     .catch(function (error) {
       console.error(error.code);
@@ -147,10 +150,27 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  cadastroEmail() {
+    // console.log(this.email, this.senha)
+    firebase.auth().createUserWithEmailAndPassword(this.emailInput, this.senhaInput)
+    .then((res: any) => {
+      console.log(res);
+      const usuario = firebase.auth().currentUser;
+      usuario.updateProfile({
+        displayName: this.nomeInput,
+        photoURL: this.urlImagem
+      });
+      alert('complete seu cadastro');
+      this.router.navigate(['/cadastro']);
+    })
+    .catch((erro: any) => {
+      console.log(erro);
+    });
+   }
+
   // Logout
   logout() {
     this.auth.logout();
-    this.router.navigate(['/login']);
   }
 
 /*
