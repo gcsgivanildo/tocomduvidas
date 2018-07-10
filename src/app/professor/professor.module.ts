@@ -15,6 +15,7 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { AreaComponent } from '../area/area/area.component';
+import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AreaComponent } from '../area/area/area.component';
     DataTableModule,
     TooltipModule,
     InputTextModule,
-    InputMaskModule
+    InputMaskModule,
+    DropdownModule
   ],
   declarations: [ProfessorComponent],
   providers: [ ProfessorService, ProfessorComponent, AreaComponent]

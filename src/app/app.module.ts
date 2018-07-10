@@ -24,6 +24,8 @@ import { RadioButtonModule, ContextMenuModule, TabViewModule } from 'primeng/pri
 import { CheckboxModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PedidoAulaModule } from './pedido-aula/pedido-aula.module';
+import { AdminModule } from 'src/app/admin/admin.module';
 
 
 
@@ -40,9 +42,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     SegurancaModule,
     HomeModule,
+    AdminModule,
     ProfessorModule,
     AlunoModule,
     CadastroModule,
+    PedidoAulaModule,
 
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFireAuthModule,

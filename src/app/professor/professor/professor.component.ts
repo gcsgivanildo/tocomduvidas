@@ -6,6 +6,7 @@ import { AreaComponent } from '../../area/area/area.component';
 import { AreaClass } from '../../area/area-class';
 import { AreaService } from '../../area/area.service';
 import { Router } from '@angular/router';
+import { ListaDeAreasService } from 'src/app/admin/areas/lista-de-areas.service';
 
 @Component({
   selector: 'app-professor',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 export class ProfessorComponent implements OnInit {
   professores: ProfessorClass[];
   areas: AreaClass[];
+  nomeArea = [];
   editarStatus = false;
   professorEditar: ProfessorClass;
   userId;
@@ -37,6 +39,7 @@ export class ProfessorComponent implements OnInit {
     public professorService: ProfessorService,
     public authService: AuthService,
     public areaService: AreaService,
+    private listaDeAreasService: ListaDeAreasService,
     public areaComponent: AreaComponent,
     private router: Router
   ) {
@@ -51,7 +54,17 @@ export class ProfessorComponent implements OnInit {
     this.areaService.getAreas().subscribe(areas => {
       this.areas = areas;
     });
+    this.pegarListaDeAreas();
+  }
 
+  pegarListaDeAreas() {
+    this.listaDeAreasService.getAreas().subscribe(areas => {
+      console.log(areas);
+      const area = areas;
+      for (let i = 0; i < area.length; i++) {
+        this.nomeArea.push({label: area[i].area, value: area[i].area});
+      }
+    });
   }
 
   cadastrarArea() {

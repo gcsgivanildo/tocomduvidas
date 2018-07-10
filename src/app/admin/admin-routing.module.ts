@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './../seguranca/auth.guard';
-import { AlunoComponent } from './aluno/aluno.component';
+import { AdminComponent } from 'src/app/admin/admin/admin.component';
+import { AuthGuard } from 'src/app/seguranca/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'aluno', component: AlunoComponent,
+    path: 'admin', component: AdminComponent,
     canActivate: [AuthGuard]
   }
 ];
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AlunoRoutingModule { }
+export class AdminRoutingModule { }

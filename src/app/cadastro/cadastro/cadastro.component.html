@@ -30,33 +30,23 @@
         <label>Telefone</label>
         <p-inputMask mask="(99)99999-9999" name="telefone" [(ngModel)]="professor.telefone"
           #telefone="ngModel" required></p-inputMask>
-
           <app-message [control]="telefone" error="required"
             text="Informe o Telefone"></app-message>
       </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>Nome da Área</label>
+          <p-dropdown [options]="nomeArea" placeholder="Selecione" [autoWidth]="false" [filter]=true
+            [(ngModel)]="area.displayName" name="areaProf" #areaProf="ngModel" required>
+          </p-dropdown>
+          <app-message [control]="areaProf" error="required"
+          text="Informe o nome"></app-message>
+        </div>
+
+        <div class="ui-md-2 ui-fluid">
+            <button pButton label="Cadastrar" (click)="onSubmitP(professor)" (click)="onSubmitD(area)"  class="ui-button-warning" [disabled]="!professorForm.valid"></button>
+        </div>
     </form>
-
-  <!--Form da área de atuação-->
-    <form #areaForm="ngForm"  (onSubmit)="onSubmitP()"> <!--#f="ngForm"-->
-      <!--parte professor-->
-      <div class="ui-g-12 ui-fluid"> <!--  class="form-group"-->
-        <label for="displayNameD" class="label">Nome da área</label>
-        <br>
-        <input pInputText type="text" class="form-control"  placeholder="Área ou Disciplina" name="displayNameD" [(ngModel)]="area.displayName"
-          #displayNameD="ngModel"  required minlength="4">
-
-        <app-message [control]="displayNameD" error="required"
-        text="Informe a área ou disciplina"></app-message>
-
-        <app-message [control]="displayNameD" error="minlength"
-        text="Mínimo de {{ displayNameD.errors?.minlength?.requiredLength }} caracteres!"></app-message>
-        <!--div class="erro" *ngIf="!nome.valid && nome.touched">Campo Obrigatório!</div-->
-      </div>
-    </form>
-
-      <div class="ui-md-2 ui-fluid">
-          <button pButton label="Cadastrar" (click)="onSubmitP(professor)"  class="ui-button-warning" [disabled]="!professorForm.valid"></button>
-      </div>
   </div>
 
   <div *ngIf="temCadastroA==false">

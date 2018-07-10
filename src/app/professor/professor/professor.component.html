@@ -24,7 +24,7 @@
 
               <td class="col-acoes">
                 <button pButton icon="fa fa-edit" pTooltip="Editar" tooltipPosition="top"
-                (click)="editarProfessor(prof.id)"  (click)="listarPerfil=flase" ></button>
+                (click)="editarProfessor(prof.id)"  (click)="listarPerfil=false" ></button>
                 <button pButton icon="fa fa-close" pTooltip="Excluir" tooltipPosition="top" (click)='deletarProfessor(prof.id)'></button>
               </td>
           </tr>
@@ -64,19 +64,12 @@
   <div *ngIf="cadastrarArea==true">
     <!--Form da área de atuação-->
     <form #areaForm="ngForm"  (onSubmit)="onSubmitP()"> <!--#f="ngForm"-->
-      <!--parte professor-->
-      <div class="ui-g-12 ui-fluid"> <!--  class="form-group"-->
-        <label for="displayNameD" class="label">Nome da área</label>
-        <br>
-        <input pInputText type="text" class="form-control"  placeholder="Área ou Disciplina" name="displayNameD" [(ngModel)]="area.displayName"
-          #displayNameD="ngModel"  required minlength="3">
 
-        <app-message [control]="displayNameD" error="required"
-        text="Informe a área ou disciplina"></app-message>
-
-        <app-message [control]="displayNameD" error="minlength"
-        text="Mínimo de {{ displayNameD.errors?.minlength?.requiredLength }} caracteres!"></app-message>
-        <!--div class="erro" *ngIf="!nome.valid && nome.touched">Campo Obrigatório!</div-->
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>Nome da Área</label>
+          <p-dropdown [options]="nomeArea" placeholder="Selecione" [autoWidth]="false" [filter]=true
+            [(ngModel)]="area.displayName" name="areaProf" #areaProf="ngModel" required>
+          </p-dropdown>
       </div>
       <div class="ui-md-2 ui-fluid">
         <button pButton label="Cadastrar" (click)="cadastrarArea(area)" class="ui-button-warning" [disabled]="!areaForm.valid"></button>
@@ -116,6 +109,33 @@
     </p-table>
   </div>
 
+  <div *ngIf="listarPedidoAula==true">
+      <p-table [value]="pedidoAula" [responsive]="true"> <!--[paginator]= "true" [rows]="5"-->
+        <ng-template pTemplate="header" >
+            <tr >
+                <th>Nome do aluno</th>
+                <th>Nome da area</th>
+                <th>Data e hora preferêncial</th>
+                <th>Detalhes</th>
+                <th class="col-acoes">Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pAula>
 
+          <tr *ngIf="prof.id===userId">
+                <td >{{pAula.displayName}}</td>
+                <td>{{pAula.nomeArea}}</td>
+                <td>{{pAula.dataHora}}</td>
+                <td>pAula.observacao</td>
+
+                <td class="col-acoes">
+                  <button pButton icon="fa fa-edit" pTooltip="Editar" tooltipPosition="top"
+                  (click)="editarProfessor(prof.id)"  (click)="listarPerfil=flase" ></button>
+                  <button pButton icon="fa fa-close" pTooltip="Excluir" tooltipPosition="top" (click)='deletarProfessor(prof.id)'></button>
+                </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>
 
 </div>

@@ -26,9 +26,10 @@
       <a href="#"> Institucional </a>
         <a href="#"> Como Funciona </a>
         <a *ngIf="!(usuario | async)" routerLinkActive="ativo" routerLink="/login"> Cadastro </a>
-        <a *ngIf="((estaCadastradoP===false)  && (usuario | async)) || ((estaCadastradoA===false) && (usuario | async))" routerLinkActive="ativo" routerLink="/cadastro"> Cadastro </a>
-        <a *ngIf="((estaCadastradoP===true)  && (usuario | async))" routerLinkActive="ativo" routerLink="/professor"> Professor </a>
-        <a *ngIf="((estaCadastradoA===true)  && (usuario | async))" routerLinkActive="ativo" routerLink="/aluno"> Aluno </a>
+        <a *ngIf="((estaCadastradoP===false)  && (usuario | async)) || ((estaCadastradoA===false) && (usuario | async))" routerLinkActive="ativo" routerLink="/cadastro">  Cadastro  </a>
+        <a *ngIf="((estaCadastradoP===true)  && (usuario | async))" routerLinkActive="ativo" routerLink="/professor">  Professor  </a>
+        <a *ngIf="((estaCadastradoA===true)  && (usuario | async))" routerLinkActive="ativo" routerLink="/aluno">  Aluno  </a>
+        <a *ngIf="((estaCadastradoA===true)  && (usuario | async))" routerLinkActive="ativo" routerLink="/pedidoAula">  Pedido de Aula  </a>
         <!--a routerLinkActive="ativo" routerLink="/teste"> Testes </a-->
         <!--button (click)="existeProfessorId()">listar</button-->
     </nav>

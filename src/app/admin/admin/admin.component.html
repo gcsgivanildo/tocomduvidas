@@ -1,0 +1,63 @@
+<div class="bckground">
+  <div>
+    <a href="javascript:;" (click)="cadastrarArea=true" (click)="listaAreas=false"> Adicionar Área  |</a>
+    <a href="javascript:;" (click)="listarTodasAreas()" (click)="listaAreas=true" (click)="cadastrarArea=false" > Listar Áreas</a>
+  </div>
+    <br>
+
+    <div *ngIf="cadastrarArea==true">
+    <!--Form da área de atuação-->
+      <form #areaForm="ngForm"  (onSubmit)="listaDeArea()"> <!--#f="ngForm"-->
+            <div class="ui-g-12 ui-fluid"> <!--  class="form-group"-->
+        <label for="area" class="label">Nome da área</label>
+        <br>
+        <input pInputText type="text" class="form-control"  placeholder="Área ou Disciplina" name="area" [(ngModel)]="listaDeArea.area"
+          #area="ngModel"  required minlength="3">
+
+        <app-message [control]="area" error="required"
+        text="Informe a área ou disciplina"></app-message>
+
+        <app-message [control]="area" error="minlength"
+        text="Mínimo de {{ area.errors?.minlength?.requiredLength }} caracteres!"></app-message>
+        <!--div class="erro" *ngIf="!nome.valid && nome.touched">Campo Obrigatório!</div-->
+      </div>
+      <div class="ui-md-2 ui-fluid">
+        <button pButton label="Cadastrar" (click)="inserirArea(listaDeArea)" class="ui-button-warning" [disabled]="!areaForm.valid"></button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="listaAreas">
+      <p-table [value]="listarAreas">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Id do Administrador</th>
+              <th>Área</th>
+              <th class="col-acoes">Ações</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-areaRow>
+          <tr>
+            <td>{{areaRow.idAdmin}}</td>
+            <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input type="text" placeholder="{{areaRow.area}}" name="area" [(ngModel)]="listaDeArea.area" required>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{areaRow.area}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
+            <td class="col-acoes">
+              <button pButton icon="fa fa-edit" pTooltip="Clique para atualizar" tooltipPosition="top"
+              (click)="updateArea(areaRow, listaDeArea)" ></button>
+              <button pButton icon="fa fa-close" pTooltip="Excluir" tooltipPosition="top" (click)='deletarArea(areaRow.id)'></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+</div>

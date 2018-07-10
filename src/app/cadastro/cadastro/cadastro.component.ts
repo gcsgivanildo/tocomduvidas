@@ -12,6 +12,7 @@ import { AlunoService } from '../../aluno/aluno.service';
 import { AreaService } from '../../area/area.service';
 import { ProfessorComponent } from '../../professor/professor/professor.component';
 import { AlunoComponent } from '../../aluno/aluno/aluno.component';
+import { ListaDeAreasService } from 'src/app/admin/areas/lista-de-areas.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -25,6 +26,7 @@ export class CadastroComponent implements OnInit {
   estaCadastradoA;
   professores: ProfessorClass[];
   alunos: AlunoClass[];
+  nomeArea = [];
 
   professor: ProfessorClass = {
     displayName: '',
@@ -46,6 +48,7 @@ export class CadastroComponent implements OnInit {
     private alunoComponent: AlunoComponent,
     private alunoService: AlunoService,
     private areaService: AreaService,
+    private listaDeAreasService: ListaDeAreasService,
     private router: Router
   ) {
     this.userId = authService.currentUserUid;
@@ -54,7 +57,19 @@ export class CadastroComponent implements OnInit {
   ngOnInit() {
     this.existeProfessorId();
     this.existeAlunoId();
+    this.pegarListaDeAreas() ;
   }
+
+  pegarListaDeAreas() {
+    this.listaDeAreasService.getAreas().subscribe(areas => {
+      console.log(areas);
+      const area = areas;
+      for (let i = 0; i < area.length; i++) {
+        this.nomeArea.push({label: area[i].area, value: area[i].area});
+      }
+    });
+  }
+
 
   existeProfessorId() {
     this.professorService.getProfessores().subscribe(professores => {
